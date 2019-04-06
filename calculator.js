@@ -17,7 +17,7 @@ function multiply(num1, num2) {
 function operate(operator, num1, num2) {
   let operators = {"+": add(num1, num2),
                    "-": subtract(num1, num2),
-                   "*": multiply(num1, num2),
+                   "x": multiply(num1, num2),
                    "/": divide(num1, num2)
                   }
   return operators[operator]
@@ -25,9 +25,6 @@ function operate(operator, num1, num2) {
 
 let numbers = document.querySelectorAll('.number');
 let display = document.querySelector('.screen');
-let firstNum;
-let secondNum;
-let currentOperator;
 
 function selectNumbers() {
   numbers = Array.from(numbers);
@@ -43,15 +40,46 @@ selectNumbers()
 
 let operators = document.querySelectorAll('.ops');
 operators = Array.from(operators);
+let nums = [];
+let opSymbols = [];
+
 function selectOperator() {
   operators.forEach((item) => {
     item.addEventListener("click", function(e) {
       let op = e.srcElement.innerText;
-      firstNum = display.textContent;
-      currentOperator = op;
-      console.log(firstNum);
-      console.log(op);
+      let num = display.textContent;
+      opSymbols.push(op);
+      nums.push(num);
+      clearScreen();
     });
   });
 }
 selectOperator()
+
+function returnSum() {
+  let result = Number(nums[0]);
+  let count = 1;
+  opSymbols.forEach((item) => {
+    result = operate(item, result, Number(nums[count]));
+    count++
+  });
+  return result;
+}
+
+function equals() {
+  let equalsBtn = document.querySelector('.equals');
+  equalsBtn.addEventListener('click', () => {
+    let currentNum = display.textContent;
+    nums.push(currentNum);
+    clearScreen()
+    let res = returnSum();
+    display.textContent = res;
+    nums = [];
+    opSymbols = [];
+  });
+}
+equals()
+
+function clearScreen() {
+  display.textContent = "";
+}
