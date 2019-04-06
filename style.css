@@ -25,9 +25,14 @@ div.screen-container {
   position: relative;
 }
 
-p.screen {
+p.primary-display {
   position: absolute;
   bottom: 0;
+  right: 0;
+}
+
+p.secondary-display {
+  position: absolute;
   right: 0;
 }
 

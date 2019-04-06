@@ -24,7 +24,7 @@ function operate(operator, num1, num2) {
 }
 
 let numbers = document.querySelectorAll('.number');
-let display = document.querySelector('.screen');
+let display = document.querySelector('.primary-display');
 
 function selectNumbers() {
   numbers = Array.from(numbers);
@@ -39,6 +39,7 @@ function selectNumbers() {
 selectNumbers()
 
 let operators = document.querySelectorAll('.ops');
+let secondaryDisplay = document.querySelector('.secondary-display');
 operators = Array.from(operators);
 let nums = [];
 let opSymbols = [];
@@ -48,8 +49,13 @@ function selectOperator() {
     item.addEventListener("click", function(e) {
       let op = e.srcElement.innerText;
       let num = display.textContent;
+      let endOfString = secondaryDisplay.textContent.slice(-2);
+      if (endOfString == "= ") secondaryDisplay.textContent = "";
+      if (num === "") return;
       opSymbols.push(op);
       nums.push(num);
+      let sums = document.createTextNode(`${num} ${op} `);
+      secondaryDisplay.appendChild(sums);
       clearScreen();
     });
   });
@@ -70,15 +76,28 @@ function equals() {
   let equalsBtn = document.querySelector('.equals');
   equalsBtn.addEventListener('click', () => {
     let currentNum = display.textContent;
+    let endOfString = secondaryDisplay.textContent.slice(-2);
+    if (currentNum === "" || endOfString === "= ") return;
     nums.push(currentNum);
     clearScreen()
     let res = returnSum();
     display.textContent = res;
+    let equalsText = document.createTextNode(`${currentNum} = `);
+    secondaryDisplay.appendChild(equalsText);
     nums = [];
     opSymbols = [];
   });
 }
 equals()
+
+function clearButton() {
+  let clearBtn = document.querySelector('.clear');
+  clearBtn.addEventListener('click', () => {
+    clearScreen()
+    secondaryDisplay.textContent = "";
+  });
+}
+clearButton();
 
 function clearScreen() {
   display.textContent = "";
