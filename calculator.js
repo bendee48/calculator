@@ -16,9 +16,9 @@ function multiply(num1, num2) {
 
 function operate(operator, num1, num2) {
   let operators = {"+": add(num1, num2),
-                   "-": subtract(num1, num2),
-                   "x": multiply(num1, num2),
-                   "/": divide(num1, num2)
+                   "−": subtract(num1, num2),
+                   "×": multiply(num1, num2),
+                   "÷": divide(num1, num2)
                   }
   return operators[operator]
 }
