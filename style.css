@@ -1,0 +1,43 @@
+body {
+  background-color: gray;
+}
+
+main {
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+div {
+  border: 1px solid black;
+}
+
+div.calculator {
+  border: 1px solid black;
+  width: 30%;
+  height: 500px;
+}
+
+div.screen-container {
+  height: 150px;
+  position: relative;
+}
+
+p.screen {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+div.btns-container {
+  height: 70%;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: auto auto auto auto;
+}
+
+div.btn {
+
+}
