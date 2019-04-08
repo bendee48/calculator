@@ -24,6 +24,7 @@ div.calculator {
 div.screen-container {
   height: 150px;
   position: relative;
+  background-color: #f5f5f5;
 }
 
 p.primary-display {
@@ -52,10 +53,6 @@ div.btns-container {
   grid-template-rows: 20% 20% 20% 20% 20%;
   margin: 0;
 }
-
-/* div {
-  border: 1px solid black;
-} */
 
 div.btn {
   text-align: center;
