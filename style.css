@@ -12,16 +12,13 @@ main {
   justify-content: center;
 }
 
-div {
-  /* border: 1px solid black; */
-}
-
 div.calculator {
   border: 1px solid black;
   width: 30%;
   height: 500px;
 }
 
+/*Screen/ Displays*/
 div.screen-container {
   height: 150px;
   position: relative;
@@ -31,16 +28,21 @@ p.primary-display {
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: 1% 2% 0 0;
+  margin: 1% 2% 0 5%;
   font-size: 4.9em;
+  border: 1px solid black;
 }
 
 p.secondary-display {
   position: absolute;
   right: 0;
-  font-size: 1.5em;
-  margin: 3% 3% 0 0;
+  font-size: 1.1em;
+  margin: 3% 3% 0 3%;
+  height: 50px;
+  overflow: auto;
 }
+
+/*Buttons*/
 
 div.btns-container {
   height: 70%;
@@ -86,4 +88,26 @@ div.equals {
 
 div.equals:hover {
   background-color: #8edd7c;
+}
+
+/*Scroll bar*/
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #dbdbdb;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3;
 }

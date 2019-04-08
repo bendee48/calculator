@@ -30,6 +30,7 @@ function selectNumbers() {
   numbers = Array.from(numbers);
   numbers.forEach((item) => {
     item.addEventListener("click", function(e){
+      if (display.textContent.length > 9) return; /*Restricts display length*/
       let num = e.srcElement.innerText;
       let showNum = document.createTextNode(num)
       display.appendChild(showNum);
@@ -69,6 +70,8 @@ function returnSum() {
     result = operate(item, result, Number(nums[count]));
     count++
   });
+  if (result % 1 !== 0) result = result.toFixed(1);// Rounds long decimals
+  if (result.toString().length > 9) result = result.toExponential(4); //Converts super long numbers
   return result;
 }
 
