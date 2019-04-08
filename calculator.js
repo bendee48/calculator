@@ -93,11 +93,56 @@ function equals() {
 }
 equals()
 
+function decimalBtn() {
+  let decButton = document.querySelector('.decimal');
+  decButton.addEventListener('click', (e) => {
+    let decimal = e.srcElement.innerText;
+    let showDecimal = document.createTextNode(decimal);
+    if (display.textContent.match(/\./)) {
+      return;
+    } else {
+      display.appendChild(showDecimal);
+    }
+  });
+}
+decimalBtn();
+
+function negativeBtn() {
+  let button = document.querySelector('.negative');
+  let negativeSign = "-";
+  button.addEventListener('click', () => {
+    let sign = document.createTextNode(negativeSign);
+    if (display.textContent.length > 1) return;
+    if (display.textContent.match(/\-/)) {
+      return
+    } else {
+      display.appendChild(sign);
+    }
+  });
+}
+negativeBtn();
+
+function backspaceBtn() {
+  let button = document.querySelector('.backspace');
+  button.addEventListener('click', () => {
+    let trimLastLetter = display.textContent.slice(0, -1);
+    display.textContent = trimLastLetter;
+  });
+}
+backspaceBtn();
+
 function clearButton() {
-  let clearBtn = document.querySelector('.clear');
-  clearBtn.addEventListener('click', () => {
-    clearScreen()
-    secondaryDisplay.textContent = "";
+  let buttons = document.querySelectorAll('.clear');
+  let clearButtons = Array.from(buttons);
+  clearButtons.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      if (e.srcElement.innerText == "CE") {
+        clearScreen();
+      } else {
+        clearScreen();
+        secondaryDisplay.textContent = "";
+      }
+    });
   });
 }
 clearButton();

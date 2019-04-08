@@ -5,7 +5,7 @@ body {
 }
 
 main {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 100%;
   height: 100%;
   display: flex;
@@ -13,9 +13,11 @@ main {
 }
 
 div.calculator {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 30%;
   height: 500px;
+  margin: 0;
+  box-shadow: 4px 4px 6px gray;
 }
 
 /*Screen/ Displays*/
@@ -30,7 +32,6 @@ p.primary-display {
   right: 0;
   margin: 1% 2% 0 5%;
   font-size: 4.9em;
-  border: 1px solid black;
 }
 
 p.secondary-display {
@@ -47,15 +48,21 @@ p.secondary-display {
 div.btns-container {
   height: 70%;
   display: grid;
-  grid-template-columns: auto auto auto auto;
-  grid-template-rows: auto auto auto auto;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+  margin: 0;
 }
+
+/* div {
+  border: 1px solid black;
+} */
 
 div.btn {
   text-align: center;
-  padding: 20% 0;
+  padding: 16% 0;
   font-size: 1.9em;
   cursor: pointer;
+  margin: 0;
 }
 
 div.number {
@@ -76,6 +83,8 @@ div.ops:hover {
 
 div.clear {
   background-color: #dbadad;
+  font-size: 1.4em;
+  padding: 22% 0;
 }
 
 div.clear:hover {
@@ -88,6 +97,15 @@ div.equals {
 
 div.equals:hover {
   background-color: #8edd7c;
+}
+
+div.decimal, div.backspace, div.negative {
+  background-color: #e0e0e0;
+}
+
+div.decimal:hover, div.backspace:hover,
+div.negative:hover {
+  background-color: #b7b7b7;
 }
 
 /*Scroll bar*/
