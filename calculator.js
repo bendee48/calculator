@@ -174,19 +174,19 @@ function clearScreen() {
 function keyboardSupport() {
   window.addEventListener('keydown', (e) => {
     let key = e.key;
-    console.log(key);
     //numbers
     if (key.match(/\d/g)) {
       let num = e.key;
       displayNumbers(num);
     }
+    //operators
     if (key.match(/[\+\-*/]/g)) {
       let op = key;
       if (key === "/") op = "÷";
       if (key === "*") op = "×";
       displayOperator(op);
     }
-    if (key.match(/Enter/g)) displayEquals();
+    if (key.match(/Enter/g)) displayEquals(); //equals
     if (key.match(/Escape/)) {
       clearScreen();
       secondaryDisplay.textContent = "";
