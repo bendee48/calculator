@@ -98,7 +98,7 @@ function decimalBtn() {
   decButton.addEventListener('click', (e) => {
     let decimal = e.srcElement.innerText;
     let showDecimal = document.createTextNode(decimal);
-    if (display.textContent.match(/\./)) {
+    if (display.textContent.match(/[\.-]/)) {
       return;
     } else {
       display.appendChild(showDecimal);
@@ -113,7 +113,7 @@ function negativeBtn() {
   button.addEventListener('click', () => {
     let sign = document.createTextNode(negativeSign);
     if (display.textContent.length > 1) return;
-    if (display.textContent.match(/\-/)) {
+    if (display.textContent.match(/[\.-]/)) {
       return
     } else {
       display.appendChild(sign);
@@ -150,3 +150,10 @@ clearButton();
 function clearScreen() {
   display.textContent = "";
 }
+
+function keyboard() {
+  window.addEventListener('keydown', (e) => {
+    console.log(e.key);
+  });
+}
+keyboard();
