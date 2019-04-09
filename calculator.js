@@ -30,14 +30,18 @@ function selectNumbers() {
   numbers = Array.from(numbers);
   numbers.forEach((item) => {
     item.addEventListener("click", function(e){
-      if (display.textContent.length > 9) return; /*Restricts display length*/
       let num = e.srcElement.innerText;
-      let showNum = document.createTextNode(num)
-      display.appendChild(showNum);
+      displayNumbers(num);
     });
   });
 }
 selectNumbers()
+
+function displayNumbers(num) {
+  if (display.textContent.length > 9) return; /*Restricts display length*/
+  let showNum = document.createTextNode(num)
+  display.appendChild(showNum);
+}
 
 let operators = document.querySelectorAll('.ops');
 let secondaryDisplay = document.querySelector('.secondary-display');
@@ -49,19 +53,23 @@ function selectOperator() {
   operators.forEach((item) => {
     item.addEventListener("click", function(e) {
       let op = e.srcElement.innerText;
-      let num = display.textContent;
-      let endOfString = secondaryDisplay.textContent.slice(-2);
-      if (endOfString == "= ") secondaryDisplay.textContent = "";
-      if (num === "") return;
-      opSymbols.push(op);
-      nums.push(num);
-      let sums = document.createTextNode(`${num} ${op} `);
-      secondaryDisplay.appendChild(sums);
-      clearScreen();
+      displayOperator(op);
     });
   });
 }
 selectOperator()
+
+function displayOperator(op) {
+  let num = display.textContent;
+  let endOfString = secondaryDisplay.textContent.slice(-2);
+  if (endOfString == "= ") secondaryDisplay.textContent = "";
+  if (num === "") return;
+  opSymbols.push(op);
+  nums.push(num);
+  let sums = document.createTextNode(`${num} ${op} `);
+  secondaryDisplay.appendChild(sums);
+  clearScreen();
+}
 
 function returnSum() {
   let result = Number(nums[0]);
@@ -78,34 +86,42 @@ function returnSum() {
 function equals() {
   let equalsBtn = document.querySelector('.equals');
   equalsBtn.addEventListener('click', () => {
-    let currentNum = display.textContent;
-    let endOfString = secondaryDisplay.textContent.slice(-2);
-    if (currentNum === "" || endOfString === "= ") return;
-    nums.push(currentNum);
-    clearScreen()
-    let res = returnSum();
-    display.textContent = res;
-    let equalsText = document.createTextNode(`${currentNum} = `);
-    secondaryDisplay.appendChild(equalsText);
-    nums = [];
-    opSymbols = [];
+    displayEquals();
   });
 }
 equals()
+
+function displayEquals() {
+  let currentNum = display.textContent;
+  let endOfString = secondaryDisplay.textContent.slice(-2);
+  if (currentNum === "" || endOfString === "= ") return;
+  nums.push(currentNum);
+  clearScreen()
+  let res = returnSum();
+  display.textContent = res;
+  let equalsText = document.createTextNode(`${currentNum} = `);
+  secondaryDisplay.appendChild(equalsText);
+  nums = [];
+  opSymbols = [];
+}
 
 function decimalBtn() {
   let decButton = document.querySelector('.decimal');
   decButton.addEventListener('click', (e) => {
     let decimal = e.srcElement.innerText;
-    let showDecimal = document.createTextNode(decimal);
-    if (display.textContent.match(/[\.-]/)) {
-      return;
-    } else {
-      display.appendChild(showDecimal);
-    }
+    displayDecimal(decimal);
   });
 }
 decimalBtn();
+
+function displayDecimal(decimal) {
+  let showDecimal = document.createTextNode(decimal);
+  if (display.textContent.match(/[\.-]/)) {
+    return;
+  } else {
+    display.appendChild(showDecimal);
+  }
+}
 
 function negativeBtn() {
   let button = document.querySelector('.negative');
@@ -125,11 +141,15 @@ negativeBtn();
 function backspaceBtn() {
   let button = document.querySelector('.backspace');
   button.addEventListener('click', () => {
-    let trimLastLetter = display.textContent.slice(0, -1);
-    display.textContent = trimLastLetter;
+    trimDisplay();
   });
 }
 backspaceBtn();
+
+function trimDisplay() {
+  let trimLastLetter = display.textContent.slice(0, -1);
+  display.textContent = trimLastLetter;
+}
 
 function clearButton() {
   let buttons = document.querySelectorAll('.clear');
@@ -151,9 +171,28 @@ function clearScreen() {
   display.textContent = "";
 }
 
-function keyboard() {
+function keyboardSupport() {
   window.addEventListener('keydown', (e) => {
-    console.log(e.key);
+    let key = e.key;
+    console.log(key);
+    //numbers
+    if (key.match(/\d/g)) {
+      let num = e.key;
+      displayNumbers(num);
+    }
+    if (key.match(/[\+\-*/]/g)) {
+      let op = key;
+      if (key === "/") op = "÷";
+      if (key === "*") op = "×";
+      displayOperator(op);
+    }
+    if (key.match(/Enter/g)) displayEquals();
+    if (key.match(/Escape/)) {
+      clearScreen();
+      secondaryDisplay.textContent = "";
+    }
+    if (key.match(/Backspace/g)) trimDisplay();
+    if (key.match(/\./g)) displayDecimal(key);
   });
 }
-keyboard();
+keyboardSupport();
